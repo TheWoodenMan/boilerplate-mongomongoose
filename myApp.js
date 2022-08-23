@@ -3,12 +3,20 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const Schema = mongoose.Schema;
 
-mongoose.connect(process.env.MONGO_URI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-});
+try {
+	mongoose.connect(
+		process.env.MONGO_URI,
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		},
+		() => console.log("Mongoose is connected")
+	);
+} catch (e) {
+	console.log("could not connect");
+}
 
-let personSchema = new Schema({
+const personSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
