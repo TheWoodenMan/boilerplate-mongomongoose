@@ -22,7 +22,7 @@ let personSchema = new mongoose.Schema({
 
 module.exports = mongoose.model("name", personSchema);
 
-let Person;
+const Person = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = (done) => {
 	done(null /*, data*/);
