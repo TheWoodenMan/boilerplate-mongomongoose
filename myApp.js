@@ -33,8 +33,30 @@ const personSchema = new Schema({
 // compiled model
 const Person = mongoose.model("Person", personSchema);
 
+// function to create and save a new Person
+
+//  Within the createAndSavePerson function, create a document
+//  instance using the Person model constructor you built before.
+//  Pass to the constructor an object having the fields name, age,
+//  and favoriteFoods. Their types must conform to the ones in the
+//   personSchema. Then, call the method document.save() on the
+//   returned document instance. Pass to it a callback using the Node
+//   convention. This is a common pattern; all the following CRUD methods
+//    take a callback function like this as the last argument.
+
 const createAndSavePerson = (done) => {
-	done(null /*, data*/);
+	// create a new person object
+	const person = new Person({
+		name: "Andy Wood",
+		age: 43,
+		favoriteFoods: ["lasagne", "indian", "pasta carbonara"],
+	});
+
+	// save them to the db
+	person.save(function (err, data) {
+		if (err) return console.error(err);
+		done(null, data);
+	});
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
