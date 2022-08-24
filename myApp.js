@@ -33,6 +33,19 @@ const personSchema = new Schema({
 // compiled model
 const Person = mongoose.model("Person", personSchema);
 
+const arrayOfPeople = [
+	{
+		"name": "Laura Gray",
+		"age": 11,
+		"favoriteFoods": ["pasta", "garlic bread"],
+	},
+	{
+		"name": "Rosa Gray",
+		"age": 8,
+		"favoriteFoods": ["pizza", "cheerios"],
+	},
+];
+
 // function to create and save a new Person
 
 const createAndSavePerson = (done) => {
@@ -49,14 +62,6 @@ const createAndSavePerson = (done) => {
 		done(null, data);
 	});
 };
-
-// Create Many Records with model.create()
-// Sometimes you need to create many instances of your models, e.g. when seeding a database with initial data.
-// Model.create() takes an array of objects like [{name: 'John', ...}, {...}, ...] as the first argument, and saves them all in the db.
-
-// Modify the createManyPeople function to create many people using Model.create() with the argument arrayOfPeople.
-
-// Note: You can reuse the model you instantiated in the previous exercise.
 
 // function to create many records from an array of objects
 
