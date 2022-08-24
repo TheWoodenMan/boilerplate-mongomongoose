@@ -65,24 +65,31 @@ const createAndSavePerson = (done) => {
 
 // function to create many records from an array of objects
 
-const createManyPeople = (arrayOfPeople, done) => {
-	// create many people using Model.create() with the argument arrayOfPeople.
-	arrayOfPeople.forEach((p) => {
-		let person = Person.create({
-			name: p.name,
-			age: p.age,
-			favoriteFoods: p.favoriteFoods,
-		});
+const createManyPeople = function (arrayOfPeople, done) {
+	Person.create(arrayOfPeople, function (err, people) {
+		if (err) return console.log(err);
 		console.log("new Person created");
-		person.save(function (err, data) {
-			if (err) return console.error(err);
-			console.log("new Person saved");
-			done(null, data);
-		});
+		done(null, people);
 	});
-
-	done(null /*, data*/);
 };
+
+// const createManyPeople = (arrayOfPeople, done) => {
+// 	// create many people using Model.create() with the argument arrayOfPeople.
+// 	arrayOfPeople.forEach((p) => {
+// 		let person = Person.create({
+// 			name: p.name,
+// 			age: p.age,
+// 			favoriteFoods: p.favoriteFoods,
+// 		});
+// 		console.log("new Person created");
+// 		person.save(function (err, data) {
+// 			if (err) return console.error(err);
+// 			console.log("new Person saved");
+// 			done(null, data);
+// 		});
+// 	});
+// 	done(null /*, data*/);
+// };
 
 const findPeopleByName = (personName, done) => {
 	done(null /*, data*/);
