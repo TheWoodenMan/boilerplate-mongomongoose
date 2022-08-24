@@ -35,31 +35,47 @@ const Person = mongoose.model("Person", personSchema);
 
 // function to create and save a new Person
 
-//  Within the createAndSavePerson function, create a document
-//  instance using the Person model constructor you built before.
-//  Pass to the constructor an object having the fields name, age,
-//  and favoriteFoods. Their types must conform to the ones in the
-//   personSchema. Then, call the method document.save() on the
-//   returned document instance. Pass to it a callback using the Node
-//   convention. This is a common pattern; all the following CRUD methods
-//    take a callback function like this as the last argument.
-
 const createAndSavePerson = (done) => {
-	// create a new person object
+	// create a new document instance using the Person model constructor
 	const person = new Person({
 		name: "Andy Wood",
 		age: 43,
 		favoriteFoods: ["lasagne", "indian", "pasta carbonara"],
 	});
 
-	// save them to the db
+	// call the method document.save() on the returned document instance
 	person.save(function (err, data) {
 		if (err) return console.error(err);
 		done(null, data);
 	});
 };
 
+// Create Many Records with model.create()
+// Sometimes you need to create many instances of your models, e.g. when seeding a database with initial data.
+// Model.create() takes an array of objects like [{name: 'John', ...}, {...}, ...] as the first argument, and saves them all in the db.
+
+// Modify the createManyPeople function to create many people using Model.create() with the argument arrayOfPeople.
+
+// Note: You can reuse the model you instantiated in the previous exercise.
+
+// function to create many records from an array of objects
+
 const createManyPeople = (arrayOfPeople, done) => {
+	// create many people using Model.create() with the argument arrayOfPeople.
+	arrayOfPeople.forEach((p) => {
+		let person = Person.create({
+			name: p.name,
+			age: p.age,
+			favoriteFoods: p.favoriteFoods,
+		});
+		console.log("new Person created");
+		person.save(function (err, data) {
+			if (err) return console.error(err);
+			console.log("new Person saved");
+			done(null, data);
+		});
+	});
+
 	done(null /*, data*/);
 };
 
