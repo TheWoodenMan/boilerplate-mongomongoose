@@ -72,27 +72,16 @@ const createManyPeople = function (arrayOfPeople, done) {
 		done(null, people);
 	});
 };
-
-// const createManyPeople = (arrayOfPeople, done) => {
-// 	// create many people using Model.create() with the argument arrayOfPeople.
-// 	arrayOfPeople.forEach((p) => {
-// 		let person = Person.create({
-// 			name: p.name,
-// 			age: p.age,
-// 			favoriteFoods: p.favoriteFoods,
-// 		});
-// 		console.log("new Person created");
-// 		person.save(function (err, data) {
-// 			if (err) return console.error(err);
-// 			console.log("new Person saved");
-// 			done(null, data);
-// 		});
-// 	});
-// 	done(null /*, data*/);
-// };
-
+// function that finds all the people
+// having a given name, using Model.find() -> [Person]
 const findPeopleByName = (personName, done) => {
-	done(null /*, data*/);
+	Person.find({ name: personName }, function (err, searchResult) {
+		if (err) {
+			console.log(searchResult);
+		}
+	});
+
+	done(null, docs);
 };
 
 const findOneByFood = (food, done) => {
