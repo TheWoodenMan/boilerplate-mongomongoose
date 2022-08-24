@@ -5,6 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
+		"logs": "heroku logs -a twm-fcc-mongodb-mongoose",
 		"dev": "nodemon server.js"
 	},
 	"dependencies": {

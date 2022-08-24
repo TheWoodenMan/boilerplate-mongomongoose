@@ -4,6 +4,7 @@ const validator = require("validator");
 const Schema = mongoose.Schema;
 
 try {
+	// Connection to mongoDB
 	mongoose.connect(
 		process.env.MONGO_URI,
 		{
@@ -13,9 +14,11 @@ try {
 		() => console.log("Mongoose is connected")
 	);
 } catch (e) {
+	// error if no connect
 	console.log("could not connect");
 }
 
+// declaring a new schema
 const personSchema = new Schema({
 	name: {
 		type: String,
@@ -25,8 +28,9 @@ const personSchema = new Schema({
 	favoriteFoods: [String],
 });
 
-// module.exports = mongoose.model("name", personSchema);
+// module.exports = mongoose.model("Person", personSchema);
 
+// compiled model
 const Person = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = (done) => {
